@@ -1,6 +1,14 @@
 from flask import Flask, request
-
+import matplotlib.pyplot as plt
+from math import sin, cos, sqrt
 app = Flask(__name__)
+
+functions = {
+    "sin": sin,
+    "cos": cos,
+    "x_squared": lambda x: x**2,
+    "sqrt_x": sqrt,
+}
 
 @app.route('/sum_of_squares')
 def sum_of_squares():
