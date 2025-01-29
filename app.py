@@ -11,6 +11,9 @@ functions = {
     "sqrt_x": sqrt,
 }
 
+@app.route("/")
+def hello():
+    return render_template('main.html')
 @app.route('/sum_of_squares')
 def sum_of_squares():
     try:
