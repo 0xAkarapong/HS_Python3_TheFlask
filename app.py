@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, render_template
 import matplotlib.pyplot as plt
 from math import sin, cos, sqrt
 import numpy as np
@@ -31,7 +31,16 @@ def plot():
         xright = float(request.form.get("xright"))
 
         x = np.linspace(xleft, xright, 100)
-        y = sin(x)
+        y = np.sin(x)
+
+        plt.plot(x, y)
+
+        image_name = f"static/images/plot.png"
+        plt.savefig(image_name)
+        plt.close()
+        return render_template("plotter.html", image_path=image_name)
+    else:
+        return render_template("plotter.html")
 
 if __name__ == '__main__':
     app.run(debug=True)
