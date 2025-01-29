@@ -1,6 +1,5 @@
 from flask import Flask, request, render_template, url_for
 import matplotlib.pyplot as plt
-from math import sin, cos, sqrt
 import numpy as np
 import io
 import base64
@@ -8,10 +7,10 @@ import base64
 app = Flask(__name__)
 
 functions = {
-    "sin": sin,
-    "cos": cos,
+    "sin": np.sin,
+    "cos": np.cos,
     "x_squared": lambda x: x**2,
-    "sqrt_x": sqrt,
+    "sqrt_x": np.sqrt,
 }
 
 @app.route("/")
@@ -38,7 +37,10 @@ def plot():
             x_from = float(request.form['x_from'])
             x_to = float(request.form['x_to'])
             function_name = request.form.get('function')
-            color = request.form.get('color') or '#0000FF'
+            color = request.form.get('color')
+
+            if not color:
+                color = '#0000FF'
 
             if not function_name:
                 return "Please select a function."
