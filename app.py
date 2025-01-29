@@ -1,6 +1,7 @@
 from flask import Flask, request
 import matplotlib.pyplot as plt
 from math import sin, cos, sqrt
+import numpy as np
 app = Flask(__name__)
 
 functions = {
@@ -22,6 +23,15 @@ def sum_of_squares():
         return "Invalid input. Please enter valid integers."
     except Exception as e:
         return f"An error occurred: {str(e)}"
+
+@app.route("/plot", methods=["GET", "POST"])
+def plot():
+    if request.method == "POST":
+        xleft = float(request.form.get("xleft"))
+        xright = float(request.form.get("xright"))
+
+        x = np.linspace(xleft, xright, 100)
+        y = sin(x)
 
 if __name__ == '__main__':
     app.run(debug=True)
