@@ -6,13 +6,14 @@
 <body>
     <h1>Plotter</h1>
     <form method="POST">
-        X from: <input type="number" name="x_from" required><br>
-        X to: <input type="number" name="x_to" required><br>
+        X from: <input type="number" name="x_from" value="0" required><br>
+        X to: <input type="number" name="x_to" value="10" required><br>
 
-        Function: <br>  {% for name, func in functions.items() %}
-            <input type="radio" name="function" value="{{ name }}" id="{{ name }}" required>  <label for="{{ name }}">{{ name }}</label>
-            Color: <input type="color" name="color" value="#0000FF"><br>
-        {% endfor %}
+        Function: <br>
+        {% for name, func in functions.items() %}
+            <input type="radio" name="function" value="{{ name }}" id="{{ name }}" required>
+            <label for="{{ name }}">{{ name }}</label>
+            <input type="color" name="color" value="#0000FF" {% if loop.first %}checked{% endif %}><br>  {% endfor %}
         <input type="submit" value="Generate Plot">
     </form>
 
