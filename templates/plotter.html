@@ -1,26 +1,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Plotting Demo</title>
+    <title>Plotter</title>
 </head>
 <body>
-    <h1>Plotting Demo</h1>
+    <h1>Plotter</h1>
     <form method="POST">
         X from: <input type="number" name="x_from" required><br>
         X to: <input type="number" name="x_to" required><br>
 
-        Function:
-        <select name="function" multiple>  <option value="sin">sin(x)</option>
-            <option value="cos">cos(x)</option>
-            <option value="x^2">x^2</option>
-            <option value="sqrt(x)">sqrt(x)</option>
-        </select><br>
-
-        Color: <input type="color" name="color" value="#0000FF" multiple><br> <input type="submit" value="Generate Plot">
+        Function: <br>  {% for name, func in functions.items() %}
+            <input type="radio" name="function" value="{{ name }}" id="{{ name }}" required>  <label for="{{ name }}">{{ name }}</label>
+            Color: <input type="color" name="color" value="#0000FF"><br>
+        {% endfor %}
+        <input type="submit" value="Generate Plot">
     </form>
 
     {% if plot_url %}
         <img src="data:image/png;base64,{{ plot_url }}" alt="Generated Plot">
     {% endif %}
+
 </body>
 </html>
